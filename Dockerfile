@@ -1,4 +1,4 @@
-FROM golang:1.12-alpine as builder
+FROM registry.docker.ir/golang:1.12-alpine as builder
 
 ENV GO111MODULE=on
 
@@ -13,7 +13,7 @@ RUN go get \
 
 RUN go build -o example cmd/example/main.go
 
-FROM alpine:latest
+FROM registry.docker.ir/alpine:latest
 RUN apk --no-cache add ca-certificates
 WORKDIR /root/
 COPY --from=builder /app/example .
